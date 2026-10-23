@@ -3,7 +3,7 @@
     "simple-button": {
       "category": "Buttons",
       "description": "This is a simple and light weight button with only onClick functionality",
-      "path": "./components/buttons/simple-button.tsx"
+      "path": "./snippets/react/components/buttons/simple-button.tsx"
     }
   }
 }
