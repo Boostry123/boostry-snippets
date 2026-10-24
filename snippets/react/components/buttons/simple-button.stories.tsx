@@ -5,6 +5,7 @@ import Button from "./simple-button";
 const meta = {
   title: "Buttons/Simple Button",
   component: Button,
+  tags: ["autodocs"],
   args: { onClick: fn() },
   argTypes: {
     children: { control: "text" },
@@ -24,5 +25,12 @@ export const Default: Story = {
 export const LongText: Story = {
   args: {
     children: "This is a button with a much longer label",
+  },
+};
+
+export const Disabled: Story = {
+  args: {
+    children: "Disabled Button",
+    disabled: true,
   },
 };

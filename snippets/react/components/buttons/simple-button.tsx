@@ -1,13 +1,23 @@
 import type { ReactNode } from "react";
 
-// Define the type for the component props
 interface ButtonProps {
+  /** Called when the button is clicked. Not called while disabled */
   onClick: () => void;
   children: ReactNode;
   disabled?: boolean;
 }
 
-// Functional Component
+/**
+ *
+ * @param onClick callback function
+ *
+ * @param children
+ *
+ * @param disabled boolean
+ *
+ * @returns A lightweight button with click handling and a disabled state
+ * Styled with Tailwind
+ */
 export default function Button({
   onClick,
   children,
