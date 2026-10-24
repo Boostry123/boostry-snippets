@@ -3,7 +3,14 @@
     "simple-button": {
       "category": "Buttons",
       "description": "This is a simple and light weight button with only onClick functionality",
-      "path": "./snippets/react/components/buttons/simple-button.tsx"
+      "path": "snippets/react/components/buttons/simple-button.tsx"
+    }
+  },
+  "Hooks": {
+    "debounce": {
+      "category": "Hooks",
+      "description": "Debounce hook that can be used to delay a callback for example search input after 500ms",
+      "path": "snippets/react/hooks/useDebounce.ts"
     }
   }
 }
