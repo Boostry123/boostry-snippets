@@ -5,5 +5,6 @@ export default defineConfig({
     include: ["snippets/**/*.test.{ts,tsx}"],
     environment: "node",
     passWithNoTests: true,
+    restoreMocks: true,
   },
 });

@@ -12,5 +12,22 @@
       "description": "Debounce hook that can be used to delay a callback for example search input after 500ms",
       "path": "snippets/react/hooks/useDebounce.ts"
     }
+  },
+  "Utils": {
+    "truncate": {
+      "category": "Utils",
+      "description": "truncate(text, maxLength, suffix = \"...\"): string. Keeps the first maxLength characters and appends suffix if text was longer; the suffix is added on top, so the result can be maxLength + suffix.length long. Returns text unchanged if it fits. Throws RangeError if maxLength is negative or not an integer. Counts UTF-16 units (emoji can be split). Use for character limits outside a CSS box (titles, notifications, previews); for on-screen text prefer Tailwind's `truncate` class",
+      "path": "snippets/utils/truncate.ts"
+    },
+    "once": {
+      "category": "Utils",
+      "description": "once(fn): wraps fn so it runs only on the first call; every later call returns the cached first result and ignores its arguments. Generic and type-preserving (same parameters and return type as fn). If fn throws, nothing is cached and the next call runs fn again. Use for one-time initialization, or to guard handlers against double execution",
+      "path": "snippets/utils/once.ts"
+    },
+    "pickRandom": {
+      "category": "Utils",
+      "description": "pickRandom<T>(array: readonly T[]): T. Returns a uniformly random item using Math.random (not cryptographically secure). Throws RangeError on an empty array. Use for random tips, placeholders or test data; not for security tokens or shuffling",
+      "path": "snippets/utils/pickRandom.ts"
+    }
   }
 }
