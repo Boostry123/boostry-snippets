@@ -1,9 +1,14 @@
 {
-  "Buttons": {
+  "Components": {
     "simple-button": {
-      "category": "Buttons",
+      "category": "Components",
       "description": "This is a simple and light weight button with only onClick functionality",
       "path": "snippets/react/components/buttons/simple-button.tsx"
+    },
+    "simple-footer": {
+      "category": "Components",
+      "description": "This is a simple and light weight footer, Dynamic that recives an array of children where each item in the array is a column in the footer or row on small screens.",
+      "path": "snippets/react/components/footers/simple-footer.tsx"
     }
   },
   "Hooks": {

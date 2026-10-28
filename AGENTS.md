@@ -21,10 +21,12 @@ snippets/
   react/
     components/
       buttons/
-        simple-button.tsx         # Snippet: Buttons/simple-button (default export `Button`)
+        simple-button.tsx         # Snippet: Components/simple-button (default export `Button`)
         simple-button.stories.tsx # Storybook stories for it
       footer/
-        simple-footer.tsx         # Placeholder (empty fragment), not in snippets.json yet
+        simple-footer.tsx         # Snippet: Components/simple-footer (default export; one equal-width column per child, stacks below `md`)
+        simple-footer.stories.tsx
+        simple-footer.test.tsx    # jsdom + @testing-library/react
     hooks/
       useDebounce.ts              # Snippet: Hooks/debounce (named export `useDebounce`)
       useDebounce.stories.tsx     # Storybook demo (DebounceDemo wrapper component)
@@ -50,9 +52,9 @@ Validated on the MCP side by the zod `SnippetList` schema: a record of **categor
 
 ```json
 {
-  "Buttons": {
+  "Components": {
     "simple-button": {
-      "category": "Buttons",
+      "category": "Components",
       "description": "This is a simple and light weight button with only onClick functionality",
       "path": "snippets/react/components/buttons/simple-button.tsx"
     }
@@ -107,10 +109,14 @@ npm run test:run         # vitest run (single run; use before committing)
   - Cover the happy path, boundaries, each option/default, and invalid input. Assert exact values; avoid weak negatives like `not.toBe(x)`.
   - Use typed mocks (`vi.fn<(a: string) => void>()` or an implementation), assert on the mock's call log for arguments, and `vi.spyOn` for globals like `Math.random`. `restoreMocks: true` restores spies before each test.
   - `toThrow` needs a function: `expect(() => fn()).toThrow(RangeError)`. A string argument matches a substring of the message.
+  - Component tests: start the file with `// @vitest-environment jsdom` (per-file, so utils stay in `node`) and add `afterEach(cleanup)` from `@testing-library/react`. Its auto-cleanup only registers when globals are on, so without it renders pile up and `getBy*` throws on multiple matches.
+  - Query by role first (`getByRole("contentinfo")` for `<footer>`), then text; `container`/`data-testid` only when no role fits. `getBy*` throws when nothing matches, so wrapping it in `expect(...).toBeDefined()` adds nothing.
+  - Check classes with `classList.contains("x")` or an exact `toBe(...)`; `toContain` on `className` is a substring match (`"gap-4"` contains `"p-4"`).
 
 ## Gotchas
 
-- `.storybook/tailwind.css` uses `@source "../snippets"` so Tailwind scans snippet files. Classes outside `snippets/` won't be generated.
+- `.storybook/tailwind.css` uses `@source "../snippets"` so Tailwind scans snippet files. Classes outside `snippets/` won't be generated. Tailwind only sees complete class names written out in the source, so never build them at runtime (`` `grid-cols-${n}` ``); use static classes (e.g. `grid-flow-col auto-cols-fr`) or a lookup map.
+- Build class strings with defaults (`className = ""`); a missing prop in a template string becomes the class `"undefined"`.
 - `*storybook.log` (e.g. `debug-storybook.log`) is gitignored. Don't commit it.
 - `useDebounce` defaults `delay` to `550` ms, while its `snippets.json` description says 500ms and calls it a callback delay. It actually debounces a **value**. Keep code and description in sync when editing either.
 - `@testing-library/dom`, `@testing-library/jest-dom` and `@testing-library/user-event` exist in `node_modules` only as transitive deps (via Storybook). Add them to `devDependencies` before importing them in tests.
